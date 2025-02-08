@@ -7,13 +7,16 @@ interface Props {
   alt?: string
   position?: string
   basePath?: string
+  typedText?: string // 允许传递要显示的打字机文本
 }
 import { Image } from 'astro:assets'
 import { url } from '../../utils/url-utils'
 
-const { id, src, alt, position = 'center', basePath = '/' } = Astro.props
+// 获取传入的属性
+const { id, src, alt, position = 'center', basePath = '/'} = Astro.props
 const className = Astro.props.class
 
+// 判断图片来源：本地图片、公共文件或外部图片
 const isLocal = !(
   src.startsWith('/') ||
   src.startsWith('http') ||
@@ -22,29 +25,43 @@ const isLocal = !(
 )
 const isPublic = src.startsWith('/')
 
-// TODO temporary workaround for images dynamic import
+// TODO 临时的解决办法，处理动态导入图片的情况
 // https://github.com/withastro/astro/issues/3373
-let img
+let img;
 if (isLocal) {
   const files = import.meta.glob<ImageMetadata>('../../**', {
     import: 'default',
   })
+  
+  // 规范化路径并处理 Windows 和 Linux 路径差异
   let normalizedPath = path
     .normalize(path.join('../../', basePath, src))
     .replace(/\\/g, '/')
+  
+  // 获取对应路径的图片文件
   const file = files[normalizedPath]
   if (!file) {
     console.error(`\n[ERROR] Image file not found: ${normalizedPath.replace('../../', 'src/')}`)
   }
+  
+  // 动态加载图片
   img = await file()
 }
 
+// 设置图片的默认样式和位置
 const imageClass = 'w-full h-full object-cover'
 const imageStyle = `object-position: ${position}`
 ---
-<div id={id} class:list={[className, 'overflow-hidden relative']}>
-    <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
-    {isLocal && img && <Image src={img} alt={alt || ""} class={imageClass} style={imageStyle}/>}
-    {!isLocal && <img src={isPublic ? url(src) : src} alt={alt || ""} class={imageClass} style={imageStyle}/>}
-</div>
 
+<div id={id} class:list={[className, 'overflow-hidden relative']}>
+    <!-- 背景蒙层，加入过渡效果 -->
+    <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
+    
+    <!-- 本地图片：使用 Astro 提供的 Image 组件 -->
+    {isLocal && img && <Image src={img} alt={alt || ""} class={imageClass} style={imageStyle}/>}
+    
+    <!-- 外部图片：直接使用普通的 <img> 标签 -->
+    {!isLocal && <img src={isPublic ? url(src) : src} alt={alt || ""} class={imageClass} style={imageStyle}/>}
+    
+    <!-- 打字机效果 -->  
+</div>

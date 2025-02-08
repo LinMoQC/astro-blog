@@ -125,6 +125,9 @@ importers:
       tailwindcss:
         specifier: ^3.4.16
         version: 3.4.16
+      typed.js:
+        specifier: ^2.1.0
+        version: 2.1.0
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
@@ -4630,6 +4633,9 @@ packages:
 
   typed-query-selector@2.12.0:
     resolution: {integrity: sha512-SbklCd1F0EiZOyPiW192rrHZzZ5sBijB6xM+cpmrwDqObvdtunOHHIk9fCGsoK5JVIYXoyEp4iEdE3upFH3PAg==}
+
+  typed.js@2.1.0:
+    resolution: {integrity: sha512-bDuXEf7YcaKN4g08NMTUM6G90XU25CK3bh6U0THC/Mod/QPKlEt9g/EjvbYB8x2Qwr2p6J6I3NrsoYaVnY6wsQ==}
 
   typesafe-path@0.2.2:
     resolution: {integrity: sha512-OJabfkAg1WLZSqJAJ0Z6Sdt3utnbzr/jh+NAHoyWHJe8CMSy79Gm085094M9nvTPy22KzTVn5Zq5mbapCI/hPA==}
@@ -10468,6 +10474,8 @@ snapshots:
       reflect.getprototypeof: 1.0.7
 
   typed-query-selector@2.12.0: {}
+
+  typed.js@2.1.0: {}
 
   typesafe-path@0.2.2: {}
 

@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'zhanku';
+    src: url('https://cdn.jsdelivr.net/gh/LinMoQC/cdn@master/Sakura/fonts/zhanku/zhanku.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    /* font-family: 'zhanku', sans-serif; */
+}
