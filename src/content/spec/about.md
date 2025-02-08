@@ -26,6 +26,9 @@
 </div>
 
 ### 🚀 开源经历
+
+<img src="https://ghchart.rshah.org/409ba5/LinMoQC" alt=""  style="width: 100%;"/>
+
 ::github{repo="LinMoQC/Memory-Blog"}
 ::github{repo="LinMoQC/Memory-LowCodeEditor"}
 ::github{repo="LinMoQC/Memory-Materials"}
